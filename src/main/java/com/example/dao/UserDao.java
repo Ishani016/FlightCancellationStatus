@@ -20,7 +20,7 @@ import com.example.dataModels.UserEntity;
 public class UserDao {
 	private Logger logger = LoggerFactory.getLogger(Logger.class);
 	@Autowired
-	private PasswordEncoder passwordEncoder;
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	public void signUp(UserEntity user) throws ClassNotFoundException, SQLException {
 		Connection conn = MySQLConnection.getConnection();
@@ -29,6 +29,7 @@ public class UserDao {
 		String name = user.getUserName();
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		String pswrd = user.getPassword();
+		System.out.println("Signup request received from" +name+" "+ pswrd);
 		
 		String query = "Insert into user (userId, userName, password) values ('" + id +"','"+ name+"','"+ pswrd+"')";
 		stmt.executeUpdate(query);

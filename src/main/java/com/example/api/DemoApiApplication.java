@@ -14,10 +14,9 @@ import com.example.dao.UserDao;
 import com.example.service.CancelServiceImplementation;
 import com.example.service.SpringUserDetails;
 import com.example.service.UserServiceImplementation;
+import com.example.userAuth.SecurityConfig;
 
 @SpringBootApplication
-//@ComponentScan("com.example.api")
-//@ComponentScan("com.example.services")
 public class DemoApiApplication {
 
 	public static void main(String[] args) {
@@ -50,7 +49,12 @@ public class DemoApiApplication {
 	}
 	
 	@Bean
-	public PasswordEncoder passwordEncoder() {
+	public BCryptPasswordEncoder passwordEncoder() {
 	    return new BCryptPasswordEncoder();
+	}
+	
+	@Bean
+	public SecurityConfig securityConfig() {
+		return new SecurityConfig();
 	}
 }

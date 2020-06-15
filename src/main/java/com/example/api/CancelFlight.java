@@ -24,7 +24,7 @@ public class CancelFlight {
 	}
 	
 	@GetMapping("/cancel")
-	public ResponseEntity<String> message(@RequestParam(required=true) Integer flightId,
+	public ResponseEntity<String> cancelFlight(@RequestParam(required=true) Integer flightId,
 			@RequestParam(required=true) Integer userId) throws ClassNotFoundException {
 
 		//get the flight for the given flight id
