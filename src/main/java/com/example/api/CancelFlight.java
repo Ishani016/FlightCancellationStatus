@@ -29,7 +29,9 @@ public class CancelFlight {
 
 		//get the flight for the given flight id
 		logger.info("Cancellation request received by "+userId);
-		this.cancelService.cancelFlightForUser(flightId, userId);
+		boolean condition = this.cancelService.cancelFlightForUser(flightId, userId);
+		if(!condition) 
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid data");
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body("Flight Cancellation Successful");
 	}
 	
@@ -38,8 +40,8 @@ public class CancelFlight {
 			@RequestParam(name="userId") Integer userId) throws ClassNotFoundException {
 		logger.info("Cancellation status request received by "+userId);
 		String status = this.cancelService.getCancelStatus(flightId, userId);
-		if(status.isEmpty())
-			status = "None";
+		if(status==null)
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid data");
 		logger.info("Status for flight for "+flightId+" for user "+ userId+ ": "+ status);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(status);
 	}

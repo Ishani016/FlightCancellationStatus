@@ -48,7 +48,7 @@ public class UserDao {
 	public UserEntity getUser(String userName) throws ClassNotFoundException, SQLException {
 		Connection conn = MySQLConnection.getConnection();
 		Statement stmt = conn.createStatement();
-		String query = "select * from user where username=userName";
+		String query = "select * from user where username='"+userName+"'";
 		ResultSet rs = stmt.executeQuery(query);
 		String password = "";
 		Integer id = 0;

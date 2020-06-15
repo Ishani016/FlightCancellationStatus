@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 
 import com.example.connection.MySQLConnection;
+import com.example.dataModels.UserEntity;
 
 
 public class CancelDao {
@@ -38,5 +39,23 @@ public class CancelDao {
 		rs.close();
 		conn.close();
 		return status;
+	}
+	
+	@Cacheable("user")
+	public UserEntity getUserById(Integer userId) throws ClassNotFoundException, SQLException {
+		Connection conn = MySQLConnection.getConnection();
+		Statement stmt = conn.createStatement();
+		String query = "select * from user where userId='"+userId+"'";
+		ResultSet rs = stmt.executeQuery(query);
+		UserEntity user = new UserEntity();
+		while(rs.next()) {
+			user.setPassword(rs.getString("password"));
+			user.setUserId(rs.getInt("userId"));
+			user.setUserName(rs.getString("userName"));
+		}
+		rs.close();
+		conn.close();
+		return user;
+
 	}
 }
