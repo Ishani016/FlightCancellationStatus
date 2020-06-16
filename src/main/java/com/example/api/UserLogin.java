@@ -77,7 +77,7 @@ public class UserLogin {
 				new UsernamePasswordAuthenticationToken(authRequest.getUserName(), authRequest.getPassword())
 				);
 		}catch (BadCredentialsException e) {
-			throw new Exception("Incorrect username or password!");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Incorrect username or password");
 		}
 		
 		UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getUserName());
@@ -85,9 +85,4 @@ public class UserLogin {
 		final String jwt = jwtUtil.generateToken(userDetails);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(new AuthenticationResponse(jwt));
 	}
-	
-	/*@Bean
-	public AuthenticationManager authenticationManagerBean() throws Exception {
-		return super.authenticationManagerBean();
-	}*/
 }

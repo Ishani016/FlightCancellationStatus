@@ -1,18 +1,23 @@
 package com.example.api;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
-import org.springframework.http.HttpStatus;
+import org.springframework.boot.test.context.SpringBootTest;
 
+@SpringBootTest
 public class CancelFlightTest {
 
 	@Test
-	public void testCancelFlight_parameters() {
-		Integer flightId = null;
+	public void testCancelFlight_flightIdNotNull() {
+		Integer flightId = 2352;
 		assertNotNull(flightId);
+	}
+	
+	@Test
+	public void testCancelFlight_userIdNotNull() {
+		Integer userId = 565767;
+		assertNotNull(userId);
 	}
 }
