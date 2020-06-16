@@ -4,8 +4,18 @@ import java.sql.SQLException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,11 +24,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.dataModels.UserEntity;
+import com.example.service.SpringUserDetails;
 import com.example.service.UserService;
+import com.example.userAuth.AuthenticationRequest;
+import com.example.userAuth.AuthenticationResponse;
+import com.example.userAuth.JwtUtil;
+import com.example.userAuth.SecurityConfig;
 
+@Import(SecurityConfig.class)
 @RestController
 public class UserLogin {
 	private Logger logger = LoggerFactory.getLogger(Logger.class);
+	
+	@Autowired
+	private AuthenticationManager authManager;
+	
+	@Autowired
+	private SpringUserDetails userDetailsService;
+	
+	@Autowired
+	private JwtUtil jwtUtil;
 	
 	UserService userService;
 
@@ -44,4 +69,25 @@ public class UserLogin {
 		logger.info("Account for user "+id+" deleted successfully!");
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(id + " has been deleted!");
 	}
+	
+	@PostMapping("/authenticate")
+	public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authRequest) throws Exception {
+		try{
+			authManager.authenticate(
+				new UsernamePasswordAuthenticationToken(authRequest.getUserName(), authRequest.getPassword())
+				);
+		}catch (BadCredentialsException e) {
+			throw new Exception("Incorrect username or password!");
+		}
+		
+		UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getUserName());
+		
+		final String jwt = jwtUtil.generateToken(userDetails);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(new AuthenticationResponse(jwt));
+	}
+	
+	/*@Bean
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}*/
 }
