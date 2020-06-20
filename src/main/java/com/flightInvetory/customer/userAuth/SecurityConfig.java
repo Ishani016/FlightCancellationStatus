@@ -53,10 +53,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	        .httpBasic();
 		httpSecurity.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 	}
-	
-	//@Bean
-	//public BCryptPasswordEncoder passwordEncoder() {
-	  //  return new BCryptPasswordEncoder();
-	//}
 
 }
