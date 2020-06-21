@@ -1,15 +1,12 @@
 package com.flightInventory.dataModels;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Entity(name="flight")
 public class Flight {
@@ -23,6 +20,20 @@ public class Flight {
 	Integer currCapacity;
 	Integer maxCapacity;
 	
+	public Flight() {	
+	}
+	
+	public Flight(int id, String source, String destination, String flightName, int cost, 
+			int currCapacity, int maxCapacity) {
+		this.cost = cost;
+		this.currCapacity = currCapacity;
+		this.destination = destination;
+		this.source = source;
+		this.fId = id;
+		this.flightName = flightName;
+		this.maxCapacity = maxCapacity;
+	}
+
 	public String getSource() {
 		return source;
 	}

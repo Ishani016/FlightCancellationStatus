@@ -15,21 +15,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.flightInventory.dataModels.Flight;
 import com.flightInventory.services.FlightService;
 import com.flightInventory.services.SpringUserDetails;
 import com.flightInvetory.customer.userAuth.JwtUtil;
 
+@EnableWebMvc
 @RestController
 public class FlightController {
 	private Logger logger = LoggerFactory.getLogger(Logger.class);
 	
+	@Autowired
 	FlightService flightService;
-	
-	public FlightController(FlightService flightService) {
-		this.flightService = flightService;
-	}
 	
 	@Autowired
 	JwtUtil jwtUtil;

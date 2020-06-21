@@ -16,8 +16,7 @@ public class SpringUserDetails implements UserDetailsService{
 	@Autowired
 	UserRepository userRepo;
 
-	private UserEntity getUserByUserName(String userName) throws ClassNotFoundException, SQLException {
-		System.out.println(userName);
+	public UserEntity getUserByUserName(String userName) throws ClassNotFoundException, SQLException {
 		UserEntity user = userRepo.getUser(userName);
 		return user;
 	}
@@ -27,6 +26,7 @@ public class SpringUserDetails implements UserDetailsService{
 		UserEntity user = new UserEntity();
 		try {
 			user = getUserByUserName(username);
+			System.out.println("I am user "+username+ user);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

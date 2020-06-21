@@ -1,17 +1,14 @@
 package com.flightInventory.dataModels;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Entity(name="user")
 public class UserEntity {
@@ -20,7 +17,16 @@ public class UserEntity {
 	String userName;
 	String password;
 	
+	public UserEntity() {	
+	}
 	
+	public UserEntity(int id, String userName, String password) {
+		this.userId = id;
+		this.userName = userName;
+		this.password = password;
+	}
+
+
 	public Integer getUserId() {
 		return this.userId;
 	}

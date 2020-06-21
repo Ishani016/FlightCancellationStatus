@@ -48,4 +48,16 @@ public class UserFlight {
 	public void setFlightId(int flightId) {
 		this.flightId = flightId;
 	}
+
+	public Integer getFId() {
+		return fId;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public String getCancellationStatus() {
+		return cancellationStatus;
+	}
 }

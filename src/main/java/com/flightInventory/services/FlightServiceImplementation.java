@@ -8,6 +8,7 @@ import java.util.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.flightInventory.dataModels.Flight;
 import com.flightInventory.dataModels.UserEntity;
@@ -40,11 +41,8 @@ public class FlightServiceImplementation implements FlightService {
 		try {
 			UserEntity user = userRepo.getUser(userName);
 			Optional<Flight> flight = flightRepo.findById(fId);
-			System.out.println("I am outside"+flight.get().getCurrCapacity());
 			if(flight.isPresent()) {
-				System.out.println("I am at the door");
 				if(flight.get().getCurrCapacity()>=0 && flight.get().getCurrCapacity()<flight.get().getMaxCapacity()) {
-					System.out.println("I entered the block!");
 					UserFlight userFlight;
 					userFlight = userFlightRepo.findUserByFlightId(fId, user.getUserId());
 					if(userFlight==null) {
@@ -66,6 +64,7 @@ public class FlightServiceImplementation implements FlightService {
 					return true;
 				}
 			}
+			return true;
 		} catch (Exception e) {
 			logger.error("Booking cannot be completed");
 			e.printStackTrace();

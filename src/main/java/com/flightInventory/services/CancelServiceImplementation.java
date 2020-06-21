@@ -55,7 +55,7 @@ public class CancelServiceImplementation implements CancelService {
 	
 	@Override 
 	public String getCancelStatus(Integer fId, Integer userId) throws ClassNotFoundException{
-		String status = "";
+		String status = "Not Cancelled";
 		try {
 			Optional<UserEntity> user = userRepo.findById(userId);
 			if(user.get()==null || user.get().getUserName()==null) {
@@ -64,7 +64,7 @@ public class CancelServiceImplementation implements CancelService {
 			}
 			status = userFlightRepo.findCancelFlightStatus(fId, userId);
 			if(status==null)
-				status = "Not cancelled";
+				status = "Not Cancelled";
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
