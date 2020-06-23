@@ -17,8 +17,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.flightInventory.api.DemoApiApplication;
-import com.flightInventory.dataModels.UserEntity;
-import com.flightInventory.repositories.UserRepository;
+import com.flightInventory.api.dataModels.UserEntity;
+import com.flightInventory.api.repositories.UserRepository;
+import com.flightInventory.api.services.SpringUserDetails;
 
 @SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)

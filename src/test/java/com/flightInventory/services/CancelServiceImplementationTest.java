@@ -15,8 +15,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.flightInventory.api.DemoApiApplication;
-import com.flightInventory.dataModels.UserFlight;
-import com.flightInventory.repositories.UserFlightRepository;
+import com.flightInventory.api.dataModels.UserFlight;
+import com.flightInventory.api.repositories.UserFlightRepository;
+import com.flightInventory.api.services.CancelServiceImplementation;
 
 @SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)

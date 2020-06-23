@@ -26,9 +26,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.flightInventory.api.DemoApiApplication;
-import com.flightInventory.controllers.FlightController;
-import com.flightInventory.dataModels.Flight;
-import com.flightInventory.services.FlightService;
+import com.flightInventory.api.controllers.FlightController;
+import com.flightInventory.api.dataModels.Flight;
+import com.flightInventory.api.services.FlightService;
 
 @SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)

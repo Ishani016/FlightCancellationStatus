@@ -21,11 +21,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.flightInventory.api.DemoApiApplication;
-import com.flightInventory.dataModels.Flight;
-import com.flightInventory.dataModels.UserFlight;
-import com.flightInventory.repositories.FlightRepository;
-import com.flightInventory.repositories.UserFlightRepository;
-import com.flightInventory.repositories.UserRepository;
+import com.flightInventory.api.dataModels.Flight;
+import com.flightInventory.api.dataModels.UserFlight;
+import com.flightInventory.api.repositories.FlightRepository;
+import com.flightInventory.api.repositories.UserFlightRepository;
+import com.flightInventory.api.repositories.UserRepository;
+import com.flightInventory.api.services.FlightServiceImplementation;
 
 @SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)
