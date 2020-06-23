@@ -8,7 +8,6 @@ import java.util.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 
 import com.flightInventory.api.dataModels.Flight;
 import com.flightInventory.api.dataModels.UserEntity;
@@ -30,7 +29,6 @@ public class FlightServiceImplementation implements FlightService {
 	UserRepository userRepo;
 	
 	@Override
-	@Cacheable(value="availableFlights", key="{ #source, #destination}")
 	public List<Flight> getFlights(String source, String destination) {
 		List<Flight> flights = new ArrayList<>();
 		flights = flightRepo.getAvailableFlights(source, destination);

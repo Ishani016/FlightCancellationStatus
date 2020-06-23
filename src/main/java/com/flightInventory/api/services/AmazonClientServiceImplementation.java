@@ -85,7 +85,6 @@ public class AmazonClientServiceImplementation implements AmazonClientService{
 	public void delete(String fileUrl) {
 		String fileName = fileUrl.substring(fileUrl.lastIndexOf("/")+1,
 				fileUrl.lastIndexOf("\""));
-		System.out.println("Laal ishq "+fileName);
 		s3client.deleteObject(new DeleteObjectRequest(bucketName, fileName));
 		logger.info(fileName+ " deleted successfully");
 	}

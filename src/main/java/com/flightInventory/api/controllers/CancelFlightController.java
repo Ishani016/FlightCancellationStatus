@@ -1,5 +1,7 @@
 package com.flightInventory.api.controllers;
 
+import java.security.Principal;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,10 @@ public class CancelFlightController {
 	
 	@GetMapping("/cancel")
 	public ResponseEntity<String> cancelFlight(@RequestParam(required=true) Integer flightId,
-			@RequestParam(required=true) Integer userId) throws ClassNotFoundException {
+			@RequestParam(required=true) Integer userId, 
+			Principal principal) throws ClassNotFoundException {
+		if(principal.getName()==null)
+			return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid user");
 		logger.info("Cancellation request received by "+userId);
 		boolean condition = this.cancelService.cancelFlightForUser(flightId, userId);
 		if(!condition) 
@@ -32,7 +37,10 @@ public class CancelFlightController {
 	
 	@GetMapping("/status")
 	public ResponseEntity<String> cancelStatus(@RequestParam(name="flightId") Integer flightId, 
-			@RequestParam(name="userId") Integer userId) throws ClassNotFoundException {
+			@RequestParam(name="userId") Integer userId,
+			Principal principal) throws ClassNotFoundException {
+		if(principal.getName()==null)
+			return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid user");
 		logger.info("Cancellation status request received by "+userId);
 		String status = this.cancelService.getCancelStatus(flightId, userId);
 		if(status==null)

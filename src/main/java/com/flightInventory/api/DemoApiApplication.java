@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +12,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.flightInventory.api.customer.userAuth.JwtRequest;
-import com.flightInventory.api.customer.userAuth.JwtUtil;
 import com.flightInventory.api.services.AmazonClientServiceImplementation;
 import com.flightInventory.api.services.CancelServiceImplementation;
 import com.flightInventory.api.services.FlightServiceImplementation;
@@ -24,6 +24,7 @@ import com.flightInventory.api.services.UserServiceImplementation;
 @ComponentScan("com.flightInventory.*")
 @EntityScan("com.flightInventory.*")
 @Configuration
+@EnableCaching
 public class DemoApiApplication {
 	 
 	public static void main(String[] args) {
@@ -63,11 +64,6 @@ public class DemoApiApplication {
 	@Bean
 	public FlightServiceImplementation flightService() {
 		return new FlightServiceImplementation();
-	}
-	
-	@Bean 
-	public JwtUtil jwtUtil() {
-		return new JwtUtil();
 	}
 
 }

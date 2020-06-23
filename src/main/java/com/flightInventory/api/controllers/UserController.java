@@ -1,5 +1,6 @@
 package com.flightInventory.api.controllers;
 
+import java.security.Principal;
 import java.sql.SQLException;
 
 import org.slf4j.Logger;
@@ -54,7 +55,10 @@ public class UserController {
 	}
 	
 	@DeleteMapping("/delete")
-	public ResponseEntity<String> deleteAccount(@RequestParam(required=true) Integer id) throws ClassNotFoundException, SQLException{
+	public ResponseEntity<String> deleteAccount(@RequestParam(required=true) Integer id, 
+			Principal principal) throws ClassNotFoundException, SQLException{
+		if(principal.getName()==null)
+			return  ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid user");
 		if(id==null)
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No userId provided");
 		logger.info("Account delete requested by "+id);
