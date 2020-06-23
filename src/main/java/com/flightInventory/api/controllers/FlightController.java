@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import com.flightInventory.api.customer.userAuth.JwtUtil;
 import com.flightInventory.api.dataModels.Flight;
 import com.flightInventory.api.services.FlightService;
 import com.flightInventory.api.services.SpringUserDetails;
-import com.flightInvetory.api.customer.userAuth.JwtUtil;
 
 @EnableWebMvc
 @RestController

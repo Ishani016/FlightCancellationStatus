@@ -10,13 +10,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.flightInventory.api.customer.userAuth.JwtRequest;
+import com.flightInventory.api.customer.userAuth.JwtUtil;
 import com.flightInventory.api.services.AmazonClientServiceImplementation;
 import com.flightInventory.api.services.CancelServiceImplementation;
 import com.flightInventory.api.services.FlightServiceImplementation;
 import com.flightInventory.api.services.SpringUserDetails;
 import com.flightInventory.api.services.UserServiceImplementation;
-import com.flightInvetory.api.customer.userAuth.JwtRequest;
-import com.flightInvetory.api.customer.userAuth.JwtUtil;
 
 @SpringBootApplication
 @EnableAutoConfiguration

@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.flightInventory.api.customer.userAuth.AuthenticationRequest;
+import com.flightInventory.api.customer.userAuth.AuthenticationResponse;
+import com.flightInventory.api.customer.userAuth.JwtUtil;
+import com.flightInventory.api.customer.userAuth.SecurityConfig;
 import com.flightInventory.api.dataModels.UserEntity;
 import com.flightInventory.api.services.SpringUserDetails;
 import com.flightInventory.api.services.UserService;
-import com.flightInvetory.api.customer.userAuth.AuthenticationRequest;
-import com.flightInvetory.api.customer.userAuth.AuthenticationResponse;
-import com.flightInvetory.api.customer.userAuth.JwtUtil;
-import com.flightInvetory.api.customer.userAuth.SecurityConfig;
 
 @Import(SecurityConfig.class)
 @RestController
