@@ -1,5 +1,7 @@
 package com.flightInventory.api.dataModels;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -9,7 +11,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Entity(name="user")
-public class UserEntity {
+//@RedisHash
+public class UserEntity implements Serializable{
 	@Id
 	Integer userId;
 	String userName;

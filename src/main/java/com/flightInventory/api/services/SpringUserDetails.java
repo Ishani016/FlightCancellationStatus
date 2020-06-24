@@ -3,6 +3,8 @@ package com.flightInventory.api.services;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.userdetails.User;
@@ -14,6 +16,7 @@ import com.flightInventory.api.dataModels.UserEntity;
 import com.flightInventory.api.repositories.UserRepository;
 
 public class SpringUserDetails implements UserDetailsService{
+	private Logger logger = LoggerFactory.getLogger(Logger.class);
 	
 	@Autowired
 	UserRepository userRepo;
@@ -21,8 +24,14 @@ public class SpringUserDetails implements UserDetailsService{
 	@Cacheable(value = "user", key="#userName")
 	public UserEntity getUserByUserName(String userName) 
 			throws ClassNotFoundException, SQLException {
-		UserEntity user = userRepo.getUser(userName);
-		return user;
+		try {
+			UserEntity user = userRepo.getUser(userName);
+			return user;
+		} catch(Exception e) {
+			logger.error("Error occurred while fetching the user "+userName);
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override

@@ -42,21 +42,10 @@ public class FlightServiceImplementation implements FlightService {
 			Optional<Flight> flight = flightRepo.findById(fId);
 			if(flight.isPresent()) {
 				if(flight.get().getCurrCapacity()>=0 && flight.get().getCurrCapacity()<flight.get().getMaxCapacity()) {
-					UserFlight userFlight;
-					userFlight = userFlightRepo.findUserByFlightId(fId, user.getUserId());
-					if(userFlight==null) {
-						userFlight = new UserFlight();
-						Random random = new Random();
-						userFlight.setFlightId(random.nextInt(1000000000));
-						userFlight.setFId(fId);
-						userFlight.setUserId(user.getUserId());
-					}
-					Flight currFlight = flight.get();
-					Integer currCapacity = currFlight.getCurrCapacity();
-					currCapacity--;
-					currFlight.setCurrCapacity(currCapacity);
-					flightRepo.save(currFlight);
+					UserFlight userFlight = getFlightForUser(fId, user.getUserId());
+					Flight currFlight = updateFlightCapacity(flight.get());
 					logger.info("Flight: "+currFlight);
+					
 					userFlight.setBookingStatus("Confirmed");
 					userFlightRepo.save(userFlight); 
 					logger.info("Saving "+userFlight +" to the db");
@@ -71,8 +60,29 @@ public class FlightServiceImplementation implements FlightService {
 		return false;
 	}
 
+	private Flight updateFlightCapacity(Flight currFlight) {
+		Integer currCapacity = currFlight.getCurrCapacity();
+		if(currCapacity>0)
+			currCapacity--;
+		currFlight.setCurrCapacity(currCapacity);
+		flightRepo.save(currFlight);
+		return currFlight;
+	}
+
+	private UserFlight getFlightForUser(Integer fId, Integer userId) {
+		UserFlight userFlight = userFlightRepo.findUserByFlightId(fId, userId);
+		if(userFlight==null) {
+			userFlight = new UserFlight();
+			Random random = new Random();
+			userFlight.setFlightId(random.nextInt(1000000000));
+			userFlight.setFId(fId);
+			userFlight.setUserId(userId);
+		}
+		return userFlight;
+	}
+
 	@Override
-	public boolean addFlight(Flight flight) {
+	public Flight addFlight(Flight flight) {
 		try {
 			Random random = new Random();
 			Integer id = flightRepo.findFIdByFlightName(flight.getFlightName());
@@ -81,12 +91,13 @@ public class FlightServiceImplementation implements FlightService {
 			}
 			flight.setFId(id);
 			flightRepo.save(flight);
-			return true;
+			logger.info(flight.getFlightName() + " flight added suucceessfully");
+			return flight;
 		} catch(Exception e) {
 			logger.error("Flight cannot be added ");
 			e.printStackTrace();
 		}
-		return false;
+		return null;
 	}
 
 }

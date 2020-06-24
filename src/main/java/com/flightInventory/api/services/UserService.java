@@ -8,7 +8,7 @@ import com.flightInventory.api.dataModels.UserEntity;
 
 @Service
 public interface UserService {
-	void userSignUp(UserEntity user) throws ClassNotFoundException, SQLException;
+	UserEntity userSignUp(UserEntity user) throws ClassNotFoundException, SQLException;
 	void deleteUser(Integer id) throws ClassNotFoundException, SQLException;
 	void addDocumentUrl(String fileUrl, String userName);
 }

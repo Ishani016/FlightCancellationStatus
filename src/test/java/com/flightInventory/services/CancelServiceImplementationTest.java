@@ -31,7 +31,7 @@ public class CancelServiceImplementationTest {
 	UserFlightRepository userFlightRepo;
 	
 	@Before
-    public void setUp(){
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 	

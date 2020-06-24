@@ -13,5 +13,5 @@ public interface FlightService {
 	@Cacheable(value="availableFlights", key="{ #source, #destination}")
 	List<Flight> getFlights(String source, String destination);
 	boolean bookFlight(Integer fId, String userName);
-	boolean addFlight(Flight flight);
+	Flight addFlight(Flight flight);
 }

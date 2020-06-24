@@ -1,5 +1,7 @@
 package com.flightInventory.api.dataModels;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -12,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name="user_flight")
-public class UserFlight {
+public class UserFlight implements Serializable {
 
 	@Id
 	Integer flightId;

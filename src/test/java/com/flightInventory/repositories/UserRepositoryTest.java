@@ -1,14 +1,11 @@
 package com.flightInventory.repositories;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Optional;
 
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.flightInventory.api.dataModels.UserEntity;
 import com.flightInventory.api.repositories.UserRepository;

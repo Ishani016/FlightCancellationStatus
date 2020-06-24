@@ -56,12 +56,22 @@ public class FlightControllerTest {
 	}
 	
 	@Test
+	public void messageTest() throws Exception {
+		RequestBuilder request = MockMvcRequestBuilders
+				.get("/")
+				.accept(MediaType.APPLICATION_JSON);
+		
+		MvcResult result = mockMvc.perform(request).andReturn();
+		int status = result.getResponse().getStatus();
+		assertEquals(202, status);
+	}
+	
+	@Test
 	public void checkFlightSourceNullDestinationNull() throws Exception {
 		RequestBuilder request = MockMvcRequestBuilders
 				.get("/checkFlight")
 				.accept(MediaType.APPLICATION_JSON);
-		MvcResult result = mockMvc.perform(request)
-								.andReturn();
+		MvcResult result = mockMvc.perform(request).andReturn();
 		int status = result.getResponse().getStatus();
 		assertEquals(400, status);
 	}
@@ -72,8 +82,7 @@ public class FlightControllerTest {
 				.get("/checkFlight")
 				.param("source", "Chennai")
 				.accept(MediaType.APPLICATION_JSON);
-		MvcResult result = mockMvc.perform(request)
-								.andReturn();
+		MvcResult result = mockMvc.perform(request).andReturn();
 		int status = result.getResponse().getStatus();
 		assertEquals(400, status);
 	}
@@ -84,8 +93,7 @@ public class FlightControllerTest {
 				.get("/checkFlight")
 				.param("destination", "Delhi")
 				.accept(MediaType.APPLICATION_JSON);
-		MvcResult result = mockMvc.perform(request)
-								.andReturn();
+		MvcResult result = mockMvc.perform(request).andReturn();
 		int status = result.getResponse().getStatus();
 		assertEquals(400, status);
 	}
@@ -95,8 +103,7 @@ public class FlightControllerTest {
 		RequestBuilder request = MockMvcRequestBuilders
 				.post("/bookFlight")
 				.accept(MediaType.APPLICATION_JSON);
-		MvcResult result = mockMvc.perform(request)
-								.andReturn();
+		MvcResult result = mockMvc.perform(request).andReturn();
 		int status = result.getResponse().getStatus();
 		assertEquals(400, status);
 	}
@@ -108,7 +115,7 @@ public class FlightControllerTest {
 		String userName = "User";
 		when(principal.getName()).thenReturn(userName);
 	    
-		when(flightService.addFlight(flight)).thenReturn(true);
+		when(flightService.addFlight(flight)).thenReturn(flight);
 		
 		RequestBuilder request = MockMvcRequestBuilders
 				.post("/addFlight")

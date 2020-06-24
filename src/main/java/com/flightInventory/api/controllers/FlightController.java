@@ -36,6 +36,11 @@ public class FlightController {
 	@Autowired
 	SpringUserDetails userDetailsService;
 	
+	@GetMapping("/")
+	public ResponseEntity<String> message() {
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body("Welcome to the Flight Inventory System");
+	}
+	
 	@GetMapping("/checkFlight")
 	public ResponseEntity<List<Flight>> getFlights(@RequestParam(required=true) String source,
 			@RequestParam String destination) {
@@ -63,13 +68,13 @@ public class FlightController {
 	}
 	
 	@PostMapping("/addFlight")
-	public ResponseEntity<String> addFlight(@RequestBody Flight flight, Principal principal) {
+	public ResponseEntity<Flight> addFlight(@RequestBody Flight flight, Principal principal) {
 		String userName = principal.getName();
 		if(userName==null)
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid user");
-		boolean condition = flightService.addFlight(flight);
-		if(!condition)
-			 return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("Flight cannot be added");
-		 return ResponseEntity.status(HttpStatus.ACCEPTED).body("Flight added!");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		Flight addedFlight = flightService.addFlight(flight);
+		if(addedFlight==null)
+			 return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(null);
+		 return ResponseEntity.status(HttpStatus.ACCEPTED).body(addedFlight);
 	}
 }

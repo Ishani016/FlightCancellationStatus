@@ -1,5 +1,7 @@
 package com.flightInventory.api.dataModels;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -9,7 +11,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Entity(name="flight")
-public class Flight {
+public class Flight implements Serializable {
 	@Id
 	Integer fId;
 	String source;

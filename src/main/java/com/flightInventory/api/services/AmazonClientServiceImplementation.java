@@ -22,7 +22,7 @@ import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
 @Configuration
-public class AmazonClientServiceImplementation implements AmazonClientService{
+public class AmazonClientServiceImplementation implements AmazonClientService {
 	private Logger logger = LoggerFactory.getLogger(Logger.class);
 	
     private AmazonS3 s3client;
@@ -51,7 +51,7 @@ public class AmazonClientServiceImplementation implements AmazonClientService{
 	    try {
 	        File file = convertMultiPartToFile(multipartFile);
 	        String fileName = generateFileName(multipartFile);
-	        fileUrl = bucketName + "/" + fileName;
+	        fileUrl = endpointUrl+bucketName + "/" + fileName;
 	        uploadFileToS3bucket(fileName, file);
 	        logger.info("File uploaded to S3 bucket successfully");
 	        file.delete();
@@ -75,18 +75,28 @@ public class AmazonClientServiceImplementation implements AmazonClientService{
 	}
 	
 	private void uploadFileToS3bucket(String fileName, File file) {
-	    s3client.putObject(new PutObjectRequest(bucketName, 
-	    		fileName, 
-	    		file)
-	            .withCannedAcl(CannedAccessControlList.PublicRead));
+		try {
+		    s3client.putObject(new PutObjectRequest(bucketName, 
+		    		fileName, 
+		    		file)
+		            .withCannedAcl(CannedAccessControlList.PublicRead));
+		} catch(Exception e) {
+			logger.error("Error occurred while uploading file to S3");
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void delete(String fileUrl) {
-		String fileName = fileUrl.substring(fileUrl.lastIndexOf("/")+1,
-				fileUrl.lastIndexOf("\""));
-		s3client.deleteObject(new DeleteObjectRequest(bucketName, fileName));
-		logger.info(fileName+ " deleted successfully");
+		try {
+			String fileName = fileUrl.substring(fileUrl.lastIndexOf("/")+1,
+					fileUrl.lastIndexOf("\""));
+			s3client.deleteObject(new DeleteObjectRequest(bucketName, fileName));
+			logger.info(fileName+ " deleted successfully");
+		} catch(Exception e) {
+			logger.error("Error occurred while deleting file from S3 bucket");
+			e.printStackTrace();
+		}
 	}
 
 }

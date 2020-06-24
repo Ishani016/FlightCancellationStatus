@@ -7,28 +7,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.stereotype.Component;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.flightInventory.api.DemoApiApplication;
 import com.flightInventory.api.dataModels.Flight;
 import com.flightInventory.api.repositories.FlightRepository;
 
-//@SpringBootTest
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(classes = DemoApiApplication.class)
-//@RunWith(SpringRunner.class)
 @DataJpaTest
 public class FlightRepositoryTest {
 

@@ -46,12 +46,12 @@ public class UserController {
 	UserService userService;
 	
 	@PostMapping("/signUp")
-	public ResponseEntity<String> userSignUp(@RequestBody @Validated UserEntity user) throws ClassNotFoundException, SQLException {
+	public ResponseEntity<UserEntity> userSignUp(@RequestBody @Validated UserEntity user) throws ClassNotFoundException, SQLException {
 		if(user.getUserName()==null || user.getPassword()==null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Insufficient data!");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 		}
-		this.userService.userSignUp(user);
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body("User sign up successful!");
+		UserEntity addedUser= this.userService.userSignUp(user);
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(addedUser);
 	}
 	
 	@DeleteMapping("/delete")

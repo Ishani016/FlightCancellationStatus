@@ -48,6 +48,7 @@ public class CancelServiceImplementation implements CancelService {
 			flightRepo.save(currFlight);
 			userFlightRepo.save(userFlight);
 		} catch (Exception e) {
+			logger.error("Error occurred while cancelling flight "+fId+" for user "+userId);
 			e.printStackTrace();
 		}
 		return true;
@@ -67,6 +68,7 @@ public class CancelServiceImplementation implements CancelService {
 			if(status==null)
 				status = "Not Cancelled";
 		} catch (Exception e) {
+			logger.error("Error occurred while retrieving the status of "+fId+" for user "+userId);
 			e.printStackTrace();
 		}
 		return status;
