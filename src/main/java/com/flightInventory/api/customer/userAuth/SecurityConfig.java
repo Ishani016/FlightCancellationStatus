@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 	        .and()
 	        .authorizeRequests()
-	            .antMatchers("/authenticate", "/signUp").permitAll()
+	            .antMatchers("/authenticate", "/signUp", "/eureka/**").permitAll()
 	            .anyRequest().authenticated()
 	        .and()
 	        .httpBasic();

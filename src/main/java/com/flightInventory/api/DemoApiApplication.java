@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +26,7 @@ import com.flightInventory.api.services.UserServiceImplementation;
 @EntityScan("com.flightInventory.*")
 @Configuration
 @EnableCaching
+@EnableEurekaServer
 public class DemoApiApplication {
 	 
 	public static void main(String[] args) {
