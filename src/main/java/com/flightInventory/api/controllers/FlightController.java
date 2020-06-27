@@ -36,7 +36,7 @@ public class FlightController {
 	@Autowired
 	SpringUserDetails userDetailsService;
 	
-	@GetMapping("/")
+	@GetMapping("/message")
 	public ResponseEntity<String> message() {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body("Welcome to the Flight Inventory System");
 	}
