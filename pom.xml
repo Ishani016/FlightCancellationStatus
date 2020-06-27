@@ -18,10 +18,10 @@
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Hoxton.SR1</spring-cloud.version>
 		
-		<sonar.projectKey>ishani016</sonar.projectKey>
-		<sonar.organization>Ishani Parashar</sonar.organization>
-		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-		<sonar.login>dabc07c5be3816046ef5c0371f6b0702ff98105c</sonar.login>
+		<sonar.projectKey>Ishani016_FlightInventorySystem</sonar.projectKey>
+	  	<sonar.organization>ishani016</sonar.organization>
+	  	<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+	  	<sonar.login>0ea9e2e129e34336abf0320cc3521a9cee723a26</sonar.login>
 		
 			<!-- test result measurements -->
 		<project.test.result.directory>${project.build.directory}/test-results</project.test.result.directory>
