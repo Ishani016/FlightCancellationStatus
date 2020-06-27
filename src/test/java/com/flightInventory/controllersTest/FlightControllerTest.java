@@ -58,7 +58,7 @@ public class FlightControllerTest {
 	@Test
 	public void messageTest() throws Exception {
 		RequestBuilder request = MockMvcRequestBuilders
-				.get("/")
+				.get("/message")
 				.accept(MediaType.APPLICATION_JSON);
 		
 		MvcResult result = mockMvc.perform(request).andReturn();
